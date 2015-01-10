@@ -1,0 +1,23 @@
+<h1>Comment</h1>
+<%= @comment.content %>
+<br><br>
+
+<% if @comment.child_comments.any? %>
+<h3>Responses</h3>
+
+<% @comment.child_comments.each do |comment| %>
+<%= link_to comment.content, comment_url(comment) %><br />
+by <%= comment.commenter.username %><br />
+<% end %>
+<% end %>
+
+<% if current_user %>
+<%= form_for(Comment.new, url: comments_url, method: :create ) do |f| %>
+Comment: <%= f.text_area :content %><br />
+
+<%= hidden_field_tag :commenter_id, current_user.id %>
+<%= hidden_field_tag :post_id, @comment.post.id %>
+<%= hidden_field_tag :parent_comment_id, params[:id] %>
+<%= f.submit "New Comment" %>
+<% end %>
+<% end %>

@@ -1,0 +1,35 @@
+<h1><%= @post.title %></h1>
+<p>Subreddits: </p>
+<% @post.subs.each do |sub| %>
+   <%= link_to sub.title, sub_url(sub) %>
+<% end %>
+
+<% unless @post.content.nil? %>
+  <p><%= @post.content %></p>
+<% end %>
+
+<% unless @post.url.nil? || @post.url.empty? %>
+<%= link_to "(#{@post.url})", @post.url %></p>
+<% end %>
+
+<% if @all_comments.any? %>
+<ul>
+  <% @all_comments.select { |comment| comment.parent_comment_id.nil? }.each do |top_comment| %>
+      <li><%= render "comment", comment: top_comment %></li>
+    <% end %>
+</ul>
+<% end %>
+
+<% if current_user %>
+  <%= form_for(Comment.new, url: comments_url, method: :create ) do |f| %>
+  Comment: <%= f.text_area :content %><br />
+
+  <%= hidden_field_tag :commenter_id, current_user.id %>
+  <%= hidden_field_tag :post_id, params[:id] %>
+  <%= f.submit "New Comment" %>
+  <% end %>
+<% end %>
+
+
+
+<%= link_to "Edit the Post", edit_post_url(@post) %>

@@ -1,0 +1,20 @@
+<h1><%= @sub.title %></h1>
+<p><%= @sub.description %></p>
+<% if @sub.posts.any? %>
+  <ul>
+    <% @sub.posts.each do |post| %>
+    <li>
+      <% if post.url.nil? || post.url.empty? %>
+        <%= link_to post.title, post_url(post) %>
+      <% else %>
+        <%= link_to post.title, post.url %>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+<p> No Posts </p>
+<% end %>
+<%= link_to "Edit", edit_sub_url(@sub) %>
+<%= link_to "All Subs", subs_url %>
+<%= link_to "Post", new_sub_post_url(@sub) %>

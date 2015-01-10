@@ -1,0 +1,17 @@
+<% req_url = (post.persisted? ? post_url(post) : posts_url ) %>
+<% req_method = (post.persisted? ? :patch : :post ) %>
+<% req_submit_value = (post.persisted? ? "update!" : "create!" ) %>
+
+<%= form_for(post, url: req_url, method: req_method ) do |f| %>
+Post Title: <%= f.text_field :title %><br />
+Post Content (optional): <%= f.text_area :content %><br />
+Post URL (optional): <%= f.text_field :url %><br />
+<br>
+Subs:<br>
+<% Sub.all.each do |sub|  %>
+  <label><%= check_box_tag :sub_ids, sub.id, post.subs.include?(sub), :name => 'post[sub_ids][]'  %><u><%= sub.title %></u></label><br>
+<% end %>
+
+<%= hidden_field_tag :sub_id, params[:sub_id] %>
+<%= f.submit req_submit_value %>
+<% end %>

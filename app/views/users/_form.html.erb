@@ -1,0 +1,9 @@
+<% req_url = (user.persisted? ? user_url(user) : users_url ) %>
+<% req_method = (user.persisted? ? :patch : :post ) %>
+<% req_submit_value = (user.persisted? ? "update!" : "create!" ) %>
+
+<%= form_for(user, url: req_url, method: req_method ) do |f| %>
+User Name: <%= f.text_field :username %><br />
+Password: <%= f.text_field :password %><br />
+<%= f.submit req_submit_value %>
+<% end %>

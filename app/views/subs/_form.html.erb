@@ -1,0 +1,9 @@
+<% req_url = (sub.persisted? ? sub_url(sub) : subs_url ) %>
+<% req_method = (sub.persisted? ? :patch : :post ) %>
+<% req_submit_value = (sub.persisted? ? "update!" : "create!" ) %>
+
+<%= form_for(sub, url: req_url, method: req_method ) do |f| %>
+Sub Title: <%= f.text_field :title %><br />
+Sub Description: <%= f.text_field :description %><br />
+<%= f.submit req_submit_value %>
+<% end %>
