@@ -13,6 +13,11 @@ class ApplicationController < ActionController::Base
     current_user ? true : false
   end
 
+  def log_in!(user)
+    user.reset_session_token
+    session[:session_token] = user.session_token
+  end
+
   def require_login
     unless logged_in?
       flash[:errors] = "You need to sign in first"

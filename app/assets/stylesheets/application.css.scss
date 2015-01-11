@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,3 +14,31 @@
  *= require_tree .
  *= require_self
  */
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Lato:900);
+
+.navbar-default {
+  background-color: #A0E9FA;
+  font-family: verdana;
+}
+
+.comments ul {
+  list-style-type: none;
+}
+.comments li {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.comments li a {
+  color: #D93829;
+}
+
+h1 {
+  font-family: 'Lato', georgia, sans-serif;
+}

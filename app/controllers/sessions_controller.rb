@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
       @user = User.new
       render :new
     elsif
-      @user.reset_session_token
-      session[:session_token] = @user.session_token
+      log_in!(@user)
       redirect_to subs_url
     end
   end

@@ -1,10 +1,10 @@
-<ul>
+<ul class="comments">
   <%= link_to comment.content, comment_url(comment) %><br />
   by <%= comment.commenter.username %><br />
 
-  <% #if comment.child_comments.any? %>
-  <% @all_comments.select {|comment| each do |child_comment| %>
-      <li><%= render "comment", comment: child_comment %></li>
+  <% if @all_comments[comment.id].any? %>
+    <% @all_comments[comment.id].each do |child_comment| %>
+      <li class="comments"><%= render "comment", comment: child_comment %></li>
+    <% end %>
   <% end %>
-<% end %>
 </ul>

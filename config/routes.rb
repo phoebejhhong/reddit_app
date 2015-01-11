@@ -11,5 +11,5 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create, :show]
 
-  root "session#new"
+  root "sessions#new"
 end

@@ -7,23 +7,30 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+    <div class="navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><%= link_to "Home", subs_url %></li>
 
-  <% if current_user %>
+          <% if current_user %>
 
-    <%= link_to "Log out", session_url, method: :delete %>
-    <%= link_to "Profile", user_url(current_user) %>
+            <li><%= link_to "Profile", user_url(current_user) %></li>
+            <li><%= link_to "Log out", session_url, method: :delete %></li>
 
-  <% else %>
+          <% else %>
 
-    <%= link_to "Sign in", new_session_url %>
-    <%= link_to "Sign up", new_user_url %>
+            <li><%= link_to "Sign in", new_session_url %></li>
+            <li><%= link_to "Sign up", new_user_url %></li>
 
-  <% end %>
+          <% end %>
 
-  <%= link_to "Home", subs_url %>
+        </ul>
+      </div>
+    </div>
 
   <%= render "/layouts/errors" %>
   <%= yield %>
-
+  </div>
 </body>
 </html>
