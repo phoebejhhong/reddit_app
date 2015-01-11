@@ -1,6 +1,9 @@
 <ul class="comments">
   <%= link_to comment.content, comment_url(comment) %><br />
-  by <%= comment.commenter.username %><br />
+  by <%= comment.commenter.username %> |
+  <%= link_to "↑", comment_upvote_url(comment.id), method: :post %>
+  <%= link_to "↓", comment_downvote_url(comment.id), method: :post %>
+  <span class="label label-default vote"><%= comment.calculate_votes %></span>
 
   <% if @all_comments[comment.id].any? %>
     <% @all_comments[comment.id].each do |child_comment| %>

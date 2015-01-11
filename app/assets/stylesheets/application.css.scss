@@ -20,25 +20,53 @@
 @import "bootstrap";
 @import url(http://fonts.googleapis.com/css?family=Lato:900);
 
-.navbar-default {
-  background-color: #A0E9FA;
-  font-family: verdana;
+
+body {
+  background-color: #4F8972;
 }
 
+.navbar-default {
+  font-family: verdana;
+  margin-bottom: 15px;
+  }
+
 .comments ul {
+  padding-left: 30px;
   list-style-type: none;
 }
 .comments li {
-  padding: 0;
-  border: 0;
-  margin: 0;
   list-style-type: none;
+  padding: 10px 0 10px 0;
 }
 
-.comments li a {
+.comment-header a {
   color: #D93829;
 }
 
 h1 {
+  font-family: 'Lato', georgia, sans-serif;
+}
+
+.btn-custom {
+  background-color: #2C3E50;
+  color: #ffffff;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+  background-color: #3B536B;
+  color: #ffffff;
+}
+
+.label-default {
+  color: #ffffff;
+  background-color: #E74C3C;
+  font-size: 12px;
+  a {
+    color: #ffffff;
+  }
+}
+
+.vote {
   font-family: 'Lato', georgia, sans-serif;
 }

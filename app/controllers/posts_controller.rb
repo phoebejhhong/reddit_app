@@ -49,6 +49,28 @@ class PostsController < ApplicationController
     @posts = post.all
   end
 
+  def upvote
+    vote = Vote.new(value: 1, voter_id: current_user.id,
+                  votable_type: 'Post', votable_id: params[:post_id])
+    if vote.save
+      redirect_to post_url(vote.votable)
+    else
+      flash[:errors] = vote.errors.full_messages
+      redirect_to post_url(vote.votable)
+    end
+  end
+
+  def downvote
+    vote = Vote.new(value: -1, voter_id: current_user.id,
+                    votable_type: 'Post', votable_id: params[:post_id])
+    if vote.save
+      redirect_to post_url(vote.votable)
+    else
+      flash[:errors] = vote.errors.full_messages
+      redirect_to post_url(vote.votable)
+    end
+  end
+
   # def destroy
   #   @post = Post.find(params[:id])
   #   if @post.author_id != current_user.id

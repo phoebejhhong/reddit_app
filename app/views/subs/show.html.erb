@@ -1,22 +1,31 @@
 <h1><%= @sub.title %></h1>
 <p><%= @sub.description %></p>
 <% if @sub.posts.any? %>
-  <ul>
+  <div class="posts">
     <% @sub.posts.each do |post| %>
-    <li>
-      <% if post.url.nil? || post.url.empty? %>
-        <%= link_to post.title, post_url(post) %>
-      <% else %>
-        <%= link_to post.title, post.url %>
-      <% end %>
-    </li>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% if post.url.nil? || post.url.empty? %>
+          <%= link_to post.title, post_url(post) %>
+        <% else %>
+          <%= link_to post.title, post.url %>
+        <% end %>
+        | submitted
+        <%= time_ago_in_words(post.created_at) %> ago by
+        <%= link_to post.author.username, user_url(post.author) %>
+      </div>
+      <div class="panel-footer">
+        <%= link_to "↑", post_upvote_url(post.id), method: :post %>
+        <%= link_to "↓", post_downvote_url(post.id), method: :post %>
+        <span class="label label-default vote"><%= post.calculate_votes %></span>
+      </div>
+    </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
 <p> No Posts </p>
 <% end %>
-<div class="btn-group">
-  <%= button_to "Edit This Sub", edit_sub_url(@sub), method: :get, class: "btn btn-default" %>
-  <%= button_to "All Subs", subs_url, method: :get, class: "btn btn-default" %>
-  <%= button_to "Post", new_sub_post_url(@sub), method: :get, class: "btn btn-default" %>
+<div class="btn-group pull-right">
+  <%= link_to "Edit This Sub", edit_sub_url(@sub), class: "btn btn-default" %>
+  <%= link_to "Post", new_sub_post_url(@sub), class: "btn btn-default btn-custom" %>
 </div>

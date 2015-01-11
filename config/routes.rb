@@ -7,9 +7,14 @@ Rails.application.routes.draw do
 
   resources :posts, except: [:new, :index, :destroy] do
     resources :comments, only: :new
+    post "upvote"
+    post "downvote"
   end
 
-  resources :comments, only: [:create, :show]
+  resources :comments, only: [:create, :show] do
+    post "upvote"
+    post "downvote"
+  end
 
   root "sessions#new"
 end
