@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'friendly_id'
 gem 'bootstrap-sass'
 gem 'bcrypt'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

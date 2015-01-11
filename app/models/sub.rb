@@ -11,6 +11,10 @@
 #
 
 class Sub < ActiveRecord::Base
+  extend FriendlyId
+
+  friendly_id :title, use: :slugged
+
   validates :title, presence: true, uniqueness: true
   validates :description, :moderator_id, presence: true
 
@@ -23,5 +27,9 @@ class Sub < ActiveRecord::Base
 
   has_many :postsubs
   has_many :posts, through: :postsubs
+
+  def posts_by_votes
+    posts.sort_by { |post| post.calculate_votes }.reverse
+  end
 
 end

@@ -11,6 +11,9 @@
 #
 
 class User < ActiveRecord::Base
+  extend FriendlyId
+
+  friendly_id :username, use: :slugged
   attr_reader :password
 
   validates :username, presence: true, uniqueness: true

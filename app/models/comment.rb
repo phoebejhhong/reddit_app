@@ -20,8 +20,7 @@ class Comment < ActiveRecord::Base
   has_many :votes, as: :votable
 
   def calculate_votes
-    return 0 if self.votes.none?
+    return 0 if votes.empty?
     self.votes.map{ |vote| vote.value }.inject(&:+)
   end
-
 end

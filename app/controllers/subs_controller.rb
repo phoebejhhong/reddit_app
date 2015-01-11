@@ -17,15 +17,15 @@ class SubsController < ApplicationController
   end
 
   def show
-    @sub = Sub.find(params[:id])
+    @sub = Sub.friendly.find(params[:id])
   end
 
   def edit
-    @sub = Sub.find(params[:id])
+    @sub = Sub.friendly.find(params[:id])
   end
 
   def update
-    @sub = Sub.find(params[:id])
+    @sub = Sub.friendly.find(params[:id])
     if @sub.moderator_id != current_user.id
       flash[:error] = "You can't edit other people's subreddits!"
       redirect_to sub_url(@sub)

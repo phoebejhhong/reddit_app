@@ -2,7 +2,7 @@
 <p><%= @sub.description %></p>
 <% if @sub.posts.any? %>
   <div class="posts">
-    <% @sub.posts.each do |post| %>
+    <% @sub.posts_by_votes.each do |post| %>
     <div class="panel panel-default">
       <div class="panel-body">
         <% if post.url.nil? || post.url.empty? %>
@@ -15,9 +15,10 @@
         <%= link_to post.author.username, user_url(post.author) %>
       </div>
       <div class="panel-footer">
-        <%= link_to "↑", post_upvote_url(post.id), method: :post %>
-        <%= link_to "↓", post_downvote_url(post.id), method: :post %>
+        <%= link_to "↑", post_upvote_url(post), method: :post %>
+        <%= link_to "↓", post_downvote_url(post), method: :post %>
         <span class="label label-default vote"><%= post.calculate_votes %></span>
+        <%= link_to "#{post.num_of_comments} comments", post_url(post) %>
       </div>
     </div>
     <% end %>
@@ -26,6 +27,6 @@
 <p> No Posts </p>
 <% end %>
 <div class="btn-group pull-right">
-  <%= link_to "Edit This Sub", edit_sub_url(@sub), class: "btn btn-default" %>
-  <%= link_to "Post", new_sub_post_url(@sub), class: "btn btn-default btn-custom" %>
+  <%= link_to "Edit This Sub", edit_sub_url(@sub.id), class: "btn btn-default" %>
+  <%= link_to "Post", new_sub_post_url(@sub.id), class: "btn btn-default btn-custom" %>
 </div>
